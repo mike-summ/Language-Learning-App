@@ -6,7 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MyTabs } from './Screens/navigationBottomTabs';
 import { Help } from './Screens/helpScreen';
 import { Reader } from './Screens/readerScreen';
+import { Edit } from './Screens/editFlashcardScreen';
 import colours from './colours';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -15,6 +17,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Language Learning" component={MyTabs} options={{headerStyle: {backgroundColor: colours.darkContrast}}} />
         <Stack.Screen name="Reader" component={Reader} options={{headerStyle: {backgroundColor: colours.darkContrast}}}/>
+        <Stack.Screen name="Edit" component={Edit} options={{headerStyle: {backgroundColor: colours.darkContrast}}}/>
         <Stack.Screen name="Help" component={Help} options={{headerStyle: {backgroundColor: colours.darkContrast}}}/>
       </Stack.Navigator>
     </NavigationContainer>

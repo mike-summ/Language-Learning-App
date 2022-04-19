@@ -56,10 +56,6 @@ export function Reader(props) {
         setTextComp(array);
     }
 
-    function WordAudio() {
-        // Fetch audio from API using 'selectedWord'.
-    }
-
     async function PressWord(word, key) {
         // Remove any punctuation from the string
         let editedWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
@@ -82,6 +78,11 @@ export function Reader(props) {
     // Add the word to the user's list of flashcards
     function AddWord() {
 
+    }
+
+    // Fetch audio from API using 'selectedWord'.
+    function WordAudio() {
+        
     }
 
     // Return the definition of the word

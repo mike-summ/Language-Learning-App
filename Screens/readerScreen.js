@@ -4,6 +4,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import colours from '../colours';
 import dictionary_api from '../Data/dictionary_api';
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { retrieveData, storeData } from '../Components/database';
 
 export function Reader(props) {
     const [textComp, setTextComp] = useState([]);
@@ -76,6 +79,11 @@ export function Reader(props) {
         }
     }
 
+    // Add the word to the user's list of flashcards
+    function AddWord() {
+
+    }
+
     // Return the definition of the word
     function GetDefinition(word) {
         let definition = dictionary_api[word]["definition"];
@@ -97,8 +105,8 @@ export function Reader(props) {
                     <Text>{definition}</Text>
                 </View>
                 <View>
-                    <Text>Add</Text>
-                    <Text>Audio</Text>
+                    <Ionicons name="add-circle" size={24} color="green" onPress={AddWord} />
+                    <AntDesign name="sound" size={24} color="black" onPress={WordAudio} />
                 </View>
             </View>
         </View>

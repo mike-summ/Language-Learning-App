@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import dummy_data from '../Data/dummy_data';
+import { dummy_data } from '../Data/dummy_data';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';

@@ -4,6 +4,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { retrieveData } from '../Components/database';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import colours from '../colours';
+import { dummy_flashcards } from '../Data/dummy_data';
 
 export function Browse() {
     /**
@@ -18,6 +20,7 @@ export function Browse() {
      * Test on phone
      */
 
+    const [data, setData] = useState(dummy_flashcards);
     const [flaschards, setFlashcards] = useState([]);
 
     const FLASHCARD_KEY = "@flashcards";
@@ -30,7 +33,8 @@ export function Browse() {
 
     // Retrieve the flashcards from local storage
     async function getFlashcards() {
-        const response = await retrieveData(FLASHCARD_KEY);
+        //const response = await retrieveData(FLASHCARD_KEY);
+        const response = data;
 
         let tempData = [];
         let array = [];

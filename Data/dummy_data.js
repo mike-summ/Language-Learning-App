@@ -1,6 +1,6 @@
 // Dummy data to simulate the library of files
 
-const dummy_data = [
+export const dummy_data = [
     {
         "name": "French book.txt",
         "location": "C:/User/Desktop/French book.txt",
@@ -13,4 +13,11 @@ const dummy_data = [
     }
 ];
 
-export default dummy_data;
+export const dummy_flashcards = [
+    {
+        "id": "0",
+        "word": "Je suis",
+        "answer": "I am",
+        "due_date": "24/4/2022"
+    },
+];

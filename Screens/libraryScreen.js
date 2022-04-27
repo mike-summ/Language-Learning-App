@@ -132,16 +132,14 @@ export function Library() {
 
     return (
         <View style={styles.container}>
-            <ScrollView stickyHeaderIndices={[0]}>
-                <View style={styles.filesLayout}>
-                    {files}
-                </View>
+            <ScrollView contentContainerStyle={styles.filesLayout} >
+                {files}
             </ScrollView>
             <View style={styles.addButton}>
                 <AntDesign name="addfile" size={60} color="white" onPress={AddFile}/>
             </View>
             <View style={styles.clearButton}>
-                <MaterialIcons name="delete-sweep" size={60} color="red" onPress={ClearData}/>
+                <MaterialIcons name="delete-sweep" size={60} color="white" onPress={ClearData}/>
             </View>
         </View>
     );
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 15,
         left: 15,
-        backgroundColor: colours.darkContrast,
+        backgroundColor: "red",
         padding: 10,
         borderRadius: 50
     },

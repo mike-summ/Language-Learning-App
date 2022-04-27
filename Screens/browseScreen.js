@@ -56,7 +56,7 @@ export function Browse() {
             <View key={data["id"]} style={styles.flaschards}>
                 <Text>{data["word"]}</Text>
                 <Text>{data["answer"]}</Text>
-                <MaterialIcons name="edit" size={24} color="black" onPress={editFlashcard(data["id"])}/>
+                <MaterialIcons name="edit" size={24} color="black" onPress={() => editFlashcard(data["id"])}/>
             </View>
         );
     }

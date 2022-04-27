@@ -59,19 +59,22 @@ export function Reader(props) {
     async function PressWord(word, key) {
         // Remove any punctuation from the string
         let editedWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-        
+        let stringWord = editedWord.replace(/[']/g, "\'");
+
         setKey(key);
-        setWord(editedWord);
+        setWord(stringWord);
 
         // Set the definition
         try {
             // Convert word to lowercase
-            let finalWord = editedWord.toLowerCase();
-
+            let finalWord = stringWord.toLowerCase();
+            console.log(finalWord);
             // Set the definition
             setDefinition(GetDefinition(finalWord));
         } catch (e) {
             alert("Word not found in dictionary! " + e);
+            setWord("");
+            setDefinition("No word selected");
         }
     }
 

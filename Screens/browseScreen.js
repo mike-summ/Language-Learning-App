@@ -6,6 +6,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import colours from '../colours';
 import { dummy_flashcards } from '../Data/dummy_data';
+import { Ionicons } from '@expo/vector-icons';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export function Browse() {
     /**
@@ -20,10 +22,11 @@ export function Browse() {
      * Test on phone
      */
 
+
+    const FLASHCARD_KEY = "@flashcards";
     const [data, setData] = useState(dummy_flashcards);
     const [flaschards, setFlashcards] = useState([]);
 
-    const FLASHCARD_KEY = "@flashcards";
     const navigation = useNavigation();
 
     // When the screen is opened, obtain all the flashcards in a list.
@@ -33,8 +36,8 @@ export function Browse() {
 
     // Retrieve the flashcards from local storage
     async function getFlashcards() {
-        //const response = await retrieveData(FLASHCARD_KEY);
-        const response = data;
+        const response = await retrieveData(FLASHCARD_KEY);
+        //const response = data;
 
         let tempData = [];
         let array = [];
@@ -53,17 +56,17 @@ export function Browse() {
     // Convert the flashcard data into a component to be added to the screen
     function applyComponent(data) {
         return (
-            <View key={data["id"]} style={styles.flaschards}>
+            <View key={data["id"]} style={styles.flashchards}>
                 <Text>{data["word"]}</Text>
                 <Text>{data["answer"]}</Text>
-                <MaterialIcons name="edit" size={24} color="black" onPress={() => editFlashcard(data["id"])}/>
+                <MaterialIcons name="edit" size={30} color="black" onPress={() => editFlashcard(data)}/>
             </View>
         );
     }
 
     // When a user selects the edit button, they will move to the edit page
-    function editFlashcard(id) {
-        navigation.push("Edit", {flashcardId: id});
+    function editFlashcard(card) {
+        navigation.push("Edit", {flashcard: card});
     }
 
     return (
@@ -72,6 +75,9 @@ export function Browse() {
             <ScrollView>
                 {flaschards}
             </ScrollView>
+            <TouchableHighlight activeOpacity={0.5} underlayColor="white" style={styles.refresh} onPress={() => getFlashcards()}>
+                <Ionicons name="refresh-circle" size={80} color={colours.darkContrast} />
+            </TouchableHighlight>
         </View>
     );
 }
@@ -84,11 +90,20 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     title: {
+        fontSize: 25,
     },
-    flaschards: {
-        backgroundColor: "white",
+    flashchards: {
+        backgroundColor: colours.lightAccent,
         flexDirection: "row",
-        margin: 5,
-        padding: 5,
+        marginHorizontal: 5,
+        marginVertical: 5,
+        paddingHorizontal: 5,
+        paddingVertical: 10,
+        justifyContent: "space-evenly"
+    },
+    refresh: {
+        width: 80,
+        left: 10,
+        borderRadius: 50,
     }
 });

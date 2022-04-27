@@ -1,6 +1,9 @@
 import React, {Component, useState, useEffect} from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { retrieveData, storeData } from '../Components/database';
 import { dummy_flashcards } from '../Data/dummy_data';
+import { Ionicons } from '@expo/vector-icons';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export function Review() {
     const [dueCards, setDueCards] = useState([]);
@@ -8,6 +11,7 @@ export function Review() {
     const [currentCard, setCurrentCard] = useState({});
     const [percentageIncrease, setIncrease] = useState(1.5);
     const [maxNewCards, setMaxNewCards] = useState(10);
+    const FLASHCARD_KEY = "@flashcards";
 
     /**
      * Have a check at the first render of the page to see how many cards are due for them.
@@ -26,42 +30,46 @@ export function Review() {
 
     // Get flashcards from database
     async function getFlashcards() {
-        // Get all the flashcards from the database
-        let array = dummy_flashcards;
-        let newArray = [];
-        let dueArray = [];
+        try {
+            // Get all the flashcards from the database
+            let array = await retrieveData(FLASHCARD_KEY);
+            let newArray = [];
+            let dueArray = [];
 
-        for (let i = 0; i < array.length; i++) {
-            if (array[i].status == "new") {
-                newArray.push(array[i]);
-            } else {
-                dueArray.push(array[i]);
+            for (let i = 0; i < array.length; i++) {
+                if (array[i].status == "new") {
+                    newArray.push(array[i]);
+                } else {
+                    dueArray.push(array[i]);
+                }
             }
-        }
 
-        // Get the current date
-        let today = new Date();
-        today = getDateString(today);
+            // Get the current date
+            let today = new Date();
+            today = getDateString(today);
 
-        // Get all the review flashcards that are due today
-        let dueCards = [];
-        for (let k = 0; k < dueArray.length; k++) {
-            if (dueArray[k].due_date == today) {
-                dueCards.push(dueArray[k]);
+            // Get all the review flashcards that are due today
+            let dueCards = [];
+            for (let k = 0; k < dueArray.length; k++) {
+                if (dueArray[k].due_date == today) {
+                    dueCards.push(dueArray[k]);
+                }
             }
-        }
 
-        // Get an amount of new cards based on the user's settings
-        let limitedNewArray = [];
-        for (let j = 0; j < maxNewCards; j++) {
-            if (newArray[j] != null) {
-                limitedNewArray.push(newArray[j]);
+            // Get an amount of new cards based on the user's settings
+            let limitedNewArray = [];
+            for (let j = 0; j < maxNewCards; j++) {
+                if (newArray[j] != null) {
+                    limitedNewArray.push(newArray[j]);
+                }
             }
-        }
 
-        setDueCards(dueCards);
-        setNewCards(limitedNewArray);
-        nextCard();
+            setDueCards(dueCards);
+            setNewCards(limitedNewArray);
+            nextCard();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     // Returns the date as a string
@@ -98,7 +106,6 @@ export function Review() {
     const ReviewCardDemo = (props) => {
         const [showAnswer, setShow] = useState(false);
         const [currentCard, setCard] = useState(props.card);
-        console.log(currentCard);
     
         if (!showAnswer) {
             return (
@@ -120,7 +127,6 @@ export function Review() {
     }
     // The user passes the card
     function pass(cardId) {
-        console.log("Passed");
         let card = getCard(cardId);
         let currentDate = new Date();
 
@@ -132,7 +138,7 @@ export function Review() {
 
             card["status"] = "review";
             card["prevDiff"] = 2;
-            card["dueDate"] = currentDate;
+            card["due_date"] = currentDate;
         } else {
             // Get current date and add (prevDiff * percentageIncrease) days
             let newDiff = Math.round(card["prevDiff"] * percentageIncrease);
@@ -140,9 +146,10 @@ export function Review() {
             currentDate = getDateString(currentDate);
 
             card["prevDiff"] = newDiff;
-            card["dueDate"] = currentDate;
+            card["due_date"] = currentDate;
         }
         // Remove the card from the review list
+        updateFlashcard(card);
         removeCard(cardId);
     }
 
@@ -157,13 +164,14 @@ export function Review() {
         if (card["status"] == "new") {
             card["status"] = "review";
             card["prevDiff"] = 1;
-            card["dueDate"] = currentDate; 
+            card["due_date"] = currentDate; 
         } else {
             card["prevDiff"] = 1;
-            card["dueDate"] = currentDate; 
+            card["due_date"] = currentDate; 
         }
 
         // Remove the card from the review list
+        updateFlashcard(card);
         removeCard(cardId);
     }
 
@@ -226,10 +234,39 @@ export function Review() {
         }
     }
 
+    async function updateFlashcard(card) {
+        try {
+            // Get flashcards from database
+            let flashcards = await retrieveData(FLASHCARD_KEY); 
+            let index = 0;
+
+            // Find the index of the card
+            for (let i = 0; i < flashcards.length; i++) {
+                if (flashcards[i]["id"] == card["id"]) {
+                    index = i;
+                }
+            }
+
+            // Remove it from the array
+            flashcards.splice(index, 1);
+
+            // Add the new card data
+            flashcards.push(card);
+            console.log(card);
+            storeData(FLASHCARD_KEY, flashcards);
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return (
         <View>
             <Text>New: {newCards.length}  Review: {dueCards.length}</Text>
             <SetView />
+            <TouchableHighlight onPress={() => getFlashcards()}>
+                <Ionicons name="refresh-circle" size={60} color="black" />
+            </TouchableHighlight>
         </View>
     );
 }

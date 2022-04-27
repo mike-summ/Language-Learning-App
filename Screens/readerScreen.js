@@ -18,6 +18,8 @@ export function Reader(props) {
 
     const fileText = params.text;
     const fileName = params.name;
+
+    const FLASHCARD_KEY = "@flashcards";
     
     useEffect(() => {
         SetText();
@@ -79,8 +81,38 @@ export function Reader(props) {
     }
 
     // Add the word to the user's list of flashcards
-    function AddWord() {
+    async function AddWord() {
+        try {
+            let flaschards = await retrieveData(FLASHCARD_KEY);
+            let id = "";
+            let word = "";
+            let answer = "";
+            let array = [];
 
+            if (typeof flaschards === "undefined") {
+                id = "0";
+            } else {
+                id = (flaschards.length + 1) + "";
+                array = [...flaschards];
+            }
+
+            word = selectedWord;
+            answer = definition;
+
+            array.push({
+                "id": id,
+                "word": word,
+                "answer": answer,
+                "due_date": "",
+                "status": "new",
+                "prevDiff": 0,
+            });
+
+            storeData(FLASHCARD_KEY, array);
+            alert("Added word!");
+        } catch(e) {
+            console.log("Add Word: " + e);
+        }
     }
 
     // Fetch audio from API using 'selectedWord'.
@@ -109,8 +141,8 @@ export function Reader(props) {
                     <Text>{definition}</Text>
                 </View>
                 <View>
-                    <Ionicons name="add-circle" size={24} color="green" onPress={AddWord} />
-                    <AntDesign name="sound" size={24} color="black" onPress={WordAudio} />
+                    <Ionicons name="add-circle" size={24} color="green" onPress={() => AddWord()} />
+                    <AntDesign name="sound" size={24} color="black" onPress={() => WordAudio()} />
                 </View>
             </View>
         </View>

@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         paddingHorizontal: 5,
         paddingVertical: 10,
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
+        borderRadius: 10,
     },
     refresh: {
         width: 80,

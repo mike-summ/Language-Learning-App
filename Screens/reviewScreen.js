@@ -4,6 +4,8 @@ import { retrieveData, storeData } from '../Components/database';
 import { dummy_flashcards } from '../Data/dummy_data';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import colours from '../colours';
+import { LogBox } from 'react-native';
 
 export function Review() {
     const [dueCards, setDueCards] = useState([]);
@@ -13,6 +15,7 @@ export function Review() {
     const [maxNewCards, setMaxNewCards] = useState(10);
     const FLASHCARD_KEY = "@flashcards";
 
+    LogBox.ignoreAllLogs();
     /**
      * Have a check at the first render of the page to see how many cards are due for them.
      * If there are none: Render "Congratulations! You have no cards left to review."
@@ -51,7 +54,7 @@ export function Review() {
             // Get all the review flashcards that are due today
             let dueCards = [];
             for (let k = 0; k < dueArray.length; k++) {
-                if (dueArray[k].due_date == today) {
+                if (dueArray[k].due_date <= today) {
                     dueCards.push(dueArray[k]);
                 }
             }
@@ -86,8 +89,8 @@ export function Review() {
         if (( dueCards.length == 0) && (newCards.length == 0)) {
             // There are no cards left to review
             return (
-                <View>
-                    <Text>Congratulations! There are no cards left to review!</Text>
+                <View style={{justifyContent: "center"}}>
+                    <Text style={styles.word}>Congratulations! There are no cards left to review!</Text>
                 </View>
             );
         } else {
@@ -109,18 +112,32 @@ export function Review() {
     
         if (!showAnswer) {
             return (
-                <View>
-                    <Text>{currentCard["word"]}</Text>
-                    <Button title="Show definition" onPress={() => setShow(true)}/>
+                <View style={{alignItems: "center",}}>
+                    <Text style={styles.word}>{currentCard["word"]}</Text>
+                    <View style={{
+                        backgroundColor: "black",
+                        height: 1,
+                    }}/>
+
+                    <TouchableHighlight activeOpacity={0.5} underlayColor="white" onPress={() => setShow(true)}>
+                        <Text style={styles.show}>Show Definition</Text>
+                    </TouchableHighlight>
                 </View>
             );
         } else {
             return (
-                <View>
-                    <Text>{currentCard["word"]}</Text>
-                    <Text>{currentCard["answer"]}</Text>
-                    <Button title="Fail" onPress={() => fail(currentCard["id"])}/>
-                    <Button title="Pass" onPress={() => pass(currentCard["id"])}/>
+                <View style={{alignItems: "center",}}>
+                    <Text style={styles.word}>{currentCard["word"]}</Text>
+                    <Text style={styles.answer}>{currentCard["answer"]}</Text>
+                    <View style={{flexDirection: "row", justifyContent: "space-evenly", }}>
+                        <TouchableHighlight activeOpacity={0.5} underlayColor="white" onPress={() => fail(currentCard["id"])}>
+                            <Text style={styles.fail}>Fail</Text>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight activeOpacity={0.5} underlayColor="white" onPress={() => pass(currentCard["id"])}>
+                            <Text style={styles.pass}>Pass</Text>
+                        </TouchableHighlight>
+                    </View>
                 </View>
             );
         }
@@ -261,12 +278,63 @@ export function Review() {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>New: {newCards.length}  Review: {dueCards.length}</Text>
-            <SetView />
-            <TouchableHighlight onPress={() => getFlashcards()}>
-                <Ionicons name="refresh-circle" size={60} color="black" />
+            <SetView style={styles.reviewBox}/>
+            <TouchableHighlight activeOpacity={0.5} underlayColor="white" style={styles.refresh} onPress={() => getFlashcards()}>
+                <Ionicons name="refresh-circle" size={80} color={colours.darkContrast} />
             </TouchableHighlight>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colours.darkAccent,
+        justifyContent: "space-between",
+        padding: 10,
+        flex: 1,
+    },
+    reviewBox: {
+        justifyContent: "space-evenly",
+        backgroundColor: colours.accent,
+    },
+    word: {
+        padding: 10,
+        fontSize: 25,
+    },
+    answer: {
+        padding: 10,
+        fontSize: 25,
+    },
+    pass: {
+        backgroundColor: "green",
+        padding: 5,
+        margin: 5,
+        color: "white",
+        borderRadius: 10,
+        fontSize: 25,
+    },
+    fail: {
+        backgroundColor: "red",
+        padding: 5,
+        margin: 5,
+        color: "white",
+        borderRadius: 10,
+        fontSize: 25,
+    },
+    show: {
+        backgroundColor: colours.accent,
+        padding: 5,
+        margin: 5,
+        color: "white",
+        borderRadius: 10,
+        fontSize: 25,
+    },
+    refresh: {
+        width: 80,
+        left: 10,
+        bottom: 10,
+        borderRadius: 50,
+    }
+});

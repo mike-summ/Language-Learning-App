@@ -141,13 +141,13 @@ export function Reader(props) {
                     <Text>{definition}</Text>
                 </View>
                 <View>
-                    <Ionicons name="add-circle" size={24} color="green" onPress={() => AddWord()} />
-                    <AntDesign name="sound" size={24} color="black" onPress={() => WordAudio()} />
+                    <Ionicons name="add-circle" size={60} color="green" onPress={() => AddWord()} />
                 </View>
             </View>
         </View>
     );
 }
+//<AntDesign name="sound" size={24} color="black" onPress={() => WordAudio()} />
 
 const styles = StyleSheet.create({
     container: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     reader: {
-        flex: 0.7,
+        flex: 0.8,
         backgroundColor: 'white',
         borderRadius: 20,
         padding: 10,
@@ -165,12 +165,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     definitionBox: {
-        flex: 0.3,
+        flex: 0.2,
         borderRadius: 20,
         backgroundColor: colours.lightAccent,
         marginVertical: 5,
         padding: 10,
-        fontSize: 25
+        fontSize: 25,
+        justifyContent: "space-around",
+        alignItems: "center"
     },
     readerText: {
         fontSize: 25,

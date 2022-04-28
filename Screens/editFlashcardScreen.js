@@ -4,6 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { retrieveData, storeData } from '../Components/database';
+import colours from '../colours';
 
 export function Edit(props) {
     const params = props.route.params;
@@ -96,16 +97,17 @@ export function Edit(props) {
     }
 
     return (
-        <View>
-            <Text>Edit Flashcard</Text>
+        <View style={styles.inputContainer}>
             <Text>Word</Text>
             <TextInput 
+                style={styles.textInput}
                 value={word}
                 placeholder="Insert the target word here!"
                 onChangeText={handleWordChange}
             />
             <Text>Answer</Text>
             <TextInput 
+                style={styles.textInput}
                 value={answer}
                 placeholder="Insert the word's english definition here!"
                 onChangeText={handleAnswerChange}
@@ -114,15 +116,51 @@ export function Edit(props) {
 
             <TouchableHighlight
                 onPress={onSubmit}
+                style={styles.submitButton}
             >
-                <Text>Save</Text>
+                <Text style={styles.submitButtonText}>Save</Text>
             </TouchableHighlight>
 
             <TouchableHighlight
                 onPress={deleteFlashcard}
+                style={styles.deleteButton}
             >
-                <Text>Delete</Text>
+                <Text style={styles.submitButtonText}>Delete</Text>
             </TouchableHighlight>
         </View>
     );
 }
+const styles = StyleSheet.create({
+    inputContainer: {
+        margin: 10,
+        justifyContent: "space-between"
+    },
+    textInput: {
+        borderColor: '#CCCCCC',
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        height: 50,
+        fontSize: 25,
+        paddingLeft: 20,
+        paddingRight: 20
+    },
+    submitButton: {
+        borderWidth: 1,
+        borderColor: colours.accent,
+        backgroundColor: colours.accent,
+        padding: 15,
+        margin: 5
+    },
+    deleteButton: {
+        borderWidth: 1,
+        borderColor: "red",
+        backgroundColor: "red",
+        padding: 15,
+        margin: 5
+    },
+    submitButtonText: {
+        color: '#FFFFFF',
+        fontSize: 20,
+        textAlign: 'center'
+    } 
+});

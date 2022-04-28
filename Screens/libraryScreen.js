@@ -180,9 +180,7 @@ const styles = StyleSheet.create({
         height: 100,
     },
     filesLayout: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'flex-start',
+      flexDirection: 'column',
     },
     readButton: {
         justifyContent: 'center',

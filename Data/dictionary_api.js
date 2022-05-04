@@ -50,220 +50,214 @@ export default frToEng = {
   "mais" : {
     "definition" : "but"
   },
-  "" : {
-    "definition" : ""
+  "j'habite" : {
+    "definition" : "I live"
   },
-  "" : {
-    "definition" : ""
+  "cagnes-sur-mer" : {
+    "definition" : "Cagnes sur mer"
   },
-  "" : {
-    "definition" : ""
+  "deux" : {
+    "definition" : "two"
   },
-  "" : {
-    "definition" : ""
+  "frères" : {
+    "definition" : "brothers"
   },
-  "" : {
-    "definition" : ""
+  "premier" : {
+    "definition" : "first"
   },
-  "" : {
-    "definition" : ""
+  "s'appelle" : {
+    "definition" : "is called"
   },
-  "" : {
-    "definition" : ""
+  "thomas" : {
+    "definition" : "Thomas"
   },
-  "" : {
-    "definition" : ""
+  "il" : {
+    "definition" : "he"
   },
-  "" : {
-    "definition" : ""
+  "a" : {
+    "definition" : "has"
   },
-  "" : {
-    "definition" : ""
+  "quatorze" : {
+    "definition" : "fourteen"
   },
-  "" : {
-    "definition" : ""
+  "le" : {
+    "definition" : "the"
   },
-  "" : {
-    "definition" : ""
+  "yann" : {
+    "definition" : "Yann"
   },
-  "" : {
-    "definition" : ""
+  "neuf" : {
+    "definition" : "nine"
   },
-  "" : {
-    "definition" : ""
+  "mon" : {
+    "definition" : "(Male) My"
   },
-  "" : {
-    "definition" : ""
+  "papa" : {
+    "definition" : "Father"
   },
-  "" : {
-    "definition" : ""
+  "est" : {
+    "definition" : "is"
   },
-  "" : {
-    "definition" : ""
+  "italien" : {
+    "definition" : "Italian"
   },
-  "" : {
-    "definition" : ""
+  "fleuriste" : {
+    "definition" : "Floriste"
   },
-  "" : {
-    "definition" : ""
+  "mère" : {
+    "definition" : "mother"
   },
-  "" : {
-    "definition" : ""
+  "allemande" : {
+    "definition" : "German"
   },
-  "" : {
-    "definition" : ""
+  "avocate" : {
+    "definition" : "lawyer"
   },
-  "" : {
-    "definition" : ""
+  "mes" : {
+    "definition" : "(Plural) my"
   },
-  "" : {
-    "definition" : ""
+  "moi" : {
+    "definition" : "me"
   },
-  "" : {
-    "definition" : ""
+  "parlons" : {
+    "definition" : "Talk"
   },
-  "" : {
-    "definition" : ""
+  "la" : {
+    "definition" : "(Fem) the"
   },
-  "" : {
-    "definition" : ""
+  "maison" : {
+    "definition" : "house"
   },
-  "" : {
-    "definition" : ""
+  "nous" : {
+    "definition" : "we"
   },
-  "" : {
-    "definition" : ""
+  "avons" : {
+    "definition" : "have"
   },
-  "" : {
-    "definition" : ""
+  "grande" : {
+    "definition" : "big"
   },
-  "" : {
-    "definition" : ""
+  "avec" : {
+    "definition" : "with"
   },
-  "" : {
-    "definition" : ""
+  "chien" : {
+    "definition" : "dog"
   },
-  "" : {
-    "definition" : ""
+  "poisson" : {
+    "definition" : "fish"
   },
-  "" : {
-    "definition" : ""
+  "chats" : {
+    "definition" : "cats"
   },
-  "" : {
-    "definition" : ""
+  "aujourd'hui" : {
+    "definition" : "today"
   },
-  "" : {
-    "definition" : ""
+  "on" : {
+    "definition" : "we"
   },
-  "" : {
-    "definition" : ""
+  "samedi" : {
+    "definition" : "Saturday"
   },
-  "" : {
-    "definition" : ""
+  "rendons" : {
+    "definition" : "let's go back"
   },
-  "" : {
-    "definition" : ""
+  "visite" : {
+    "definition" : "visit"
   },
-  "" : {
-    "definition" : ""
+  "notre" : {
+    "definition" : "our"
   },
-  "" : {
-    "definition" : ""
+  "grand-mère" : {
+    "definition" : "Grandmother"
   },
-  "" : {
-    "definition" : ""
+  "elle" : {
+    "definition" : "she"
   },
-  "" : {
-    "definition" : ""
+  "habite" : {
+    "definition" : "reside (live in)"
   },
-  "" : {
-    "definition" : ""
+  "antibes" : {
+    "definition" : "antibes"
   },
-  "" : {
-    "definition" : ""
+  "j'adore" : {
+    "definition" : "I love"
   },
-  "" : {
-    "definition" : ""
+  "très" : {
+    "definition" : "very"
   },
-  "" : {
-    "definition" : ""
+  "gentille" : {
+    "definition" : "gentle"
   },
-  "" : {
-    "definition" : ""
+  "fait" : {
+    "definition" : "fact"
   },
-  "" : {
-    "definition" : ""
+  "des" : {
+    "definition" : "from"
   },
-  "" : {
-    "definition" : ""
+  "bons" : {
+    "definition" : "good"
   },
-  "" : {
-    "definition" : ""
+  "gâteaux" : {
+    "definition" : "cakes"
   },
-  "" : {
-    "definition" : ""
+  "lundi" : {
+    "definition" : "Monday"
   },
-  "" : {
-    "definition" : ""
+  "retourne" : {
+    "definition" : "return"
   },
-  "" : {
-    "definition" : ""
+  "l’école" : {
+    "definition" : "school"
   },
-  "" : {
-    "definition" : ""
+  "contente" : {
+    "definition" : "satisfied"
   },
-  "" : {
-    "definition" : ""
+  "voir" : {
+    "definition" : "to see"
   },
-  "" : {
-    "definition" : ""
+  "amélie" : {
+    "definition" : "Amelie"
   },
-  "" : {
-    "definition" : ""
+  "c'est" : {
+    "definition" : "it is"
   },
-  "" : {
-    "definition" : ""
+  "ma" : {
+    "definition" : "(Fem) My"
   },
-  "" : {
-    "definition" : ""
+  "meilleure" : {
+    "definition" : "best"
   },
-  "" : {
-    "definition" : ""
+  "amie" : {
+    "definition" : "friend"
   },
-  "" : {
-    "definition" : ""
+  "j'aime" : {
+    "definition" : "I like"
   },
-  "" : {
-    "definition" : ""
+  "beaucoup" : {
+    "definition" : "a lot"
   },
-  "" : {
-    "definition" : ""
+  "matières" : {
+    "definition" : "materials"
   },
-  "" : {
-    "definition" : ""
+  "préférées" : {
+    "definition" : "favourite"
   },
-  "" : {
-    "definition" : ""
+  "sont" : {
+    "definition" : "are"
   },
-  "" : {
-    "definition" : ""
+  "le" : {
+    "definition" : "(Male) the"
   },
-  "" : {
-    "definition" : ""
+  "sport" : {
+    "definition" : "sport"
   },
-  "" : {
-    "definition" : ""
+  "lire" : {
+    "definition" : "read"
   },
-  "" : {
-    "definition" : ""
+  "nage" : {
+    "definition" : "swimming"
   },
-  "" : {
-    "definition" : ""
-  },
-  "" : {
-    "definition" : ""
-  },
-  "" : {
-    "definition" : ""
+  "bien" : {
+    "definition" : "good"
   },
 };

@@ -13,7 +13,9 @@ export function Review() {
     const [currentCard, setCurrentCard] = useState({});
     const [percentageIncrease, setIncrease] = useState(1.5);
     const [maxNewCards, setMaxNewCards] = useState(10);
+
     const FLASHCARD_KEY = "@flashcards";
+    const SETTINGS_KEY = "@settings";
 
     LogBox.ignoreAllLogs();
     /**
@@ -36,6 +38,11 @@ export function Review() {
         try {
             // Get all the flashcards from the database
             let array = await retrieveData(FLASHCARD_KEY);
+            let settings = await retrieveData(SETTINGS_KEY);
+
+            setIncrease(settings["increase"]);
+            setMaxNewCards(settings["new"]);
+
             let newArray = [];
             let dueArray = [];
 
@@ -54,7 +61,11 @@ export function Review() {
             // Get all the review flashcards that are due today
             let dueCards = [];
             for (let k = 0; k < dueArray.length; k++) {
-                if (dueArray[k].due_date <= today) {
+
+                let dueDate = new Date(dueArray[k].due_date.split('/')[2], dueArray[k].due_date.split('/')[1] - 1, dueArray[k].due_date.split('/')[0]);
+                let todayDate = new Date(today);
+
+                if (dueDate <= todayDate) {
                     dueCards.push(dueArray[k]);
                 }
             }

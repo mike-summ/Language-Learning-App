@@ -14,11 +14,17 @@ export default frToEng = {
   "suis" : {
     "definition" : "(I) am"
   },
+  "un" : {
+    "definition" : "(fem) a"
+  },
   "une" : {
     "definition" : "(fem) a"
   },
   "fille" : {
     "definition" : "girl"
+  },
+  "français" : {
+    "definition" : "French"
   },
   "française" : {
     "definition" : "French"
@@ -107,7 +113,7 @@ export default frToEng = {
   "mère" : {
     "definition" : "mother"
   },
-  "allemande" : {
+  "allemand" : {
     "definition" : "German"
   },
   "avocate" : {
@@ -189,7 +195,7 @@ export default frToEng = {
     "definition" : "gentle"
   },
   "fait" : {
-    "definition" : "fact"
+    "definition" : "Verb: `faire`\n to make/to do"
   },
   "des" : {
     "definition" : "from"
@@ -237,7 +243,7 @@ export default frToEng = {
     "definition" : "a lot"
   },
   "matières" : {
-    "definition" : "materials"
+    "definition" : "subject"
   },
   "préférées" : {
     "definition" : "favourite"

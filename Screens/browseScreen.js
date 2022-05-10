@@ -56,10 +56,23 @@ export function Browse() {
     // Convert the flashcard data into a component to be added to the screen
     function applyComponent(data) {
         return (
-            <View key={data["id"]} style={styles.flashchards}>
-                <Text>{data["word"]}</Text>
-                <Text>{data["answer"]}</Text>
-                <MaterialIcons name="edit" size={30} color="black" onPress={() => editFlashcard(data)}/>
+            <View key={data["id"]} style={{
+                flexDirection: "row", 
+                justifyContent: "space-between", 
+                backgroundColor: colours.lightAccent,
+                marginHorizontal: 5,
+                marginVertical: 5,
+                paddingHorizontal: 5,
+                paddingVertical: 10,
+                borderRadius: 10,
+            }}>
+                <View style={styles.flashchards}>
+                    <Text>{data["word"]}</Text>
+                    <Text>{data["answer"]}</Text>
+                </View>
+                <View style={{flexDirection: "row", flex: 0.25,}}>
+                    <MaterialIcons name="edit" size={30} color="black" onPress={() => editFlashcard(data)}/>
+                </View>
             </View>
         );
     }
@@ -72,6 +85,11 @@ export function Browse() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>List of Flashcards</Text>
+            <View style={styles.titleTable}>
+                <Text style={styles.titleTableText}>Word</Text>
+                <Text style={styles.titleTableText}>Definition</Text>
+                <Text style={styles.titleTableText}>Edit</Text>
+            </View>
             <ScrollView>
                 {flaschards}
             </ScrollView>
@@ -91,16 +109,22 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
+        alignContent: "center"
+    },
+    titleTableText: {
+        fontWeight: "bold"
     },
     flashchards: {
-        backgroundColor: colours.lightAccent,
+        flexDirection: "row",
+        flex: 0.7,
+        justifyContent: "space-around",
+    },
+    titleTable: {
         flexDirection: "row",
         marginHorizontal: 5,
         marginVertical: 5,
         paddingHorizontal: 5,
-        paddingVertical: 10,
         justifyContent: "space-evenly",
-        borderRadius: 10,
     },
     refresh: {
         width: 80,

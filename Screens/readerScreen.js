@@ -60,7 +60,7 @@ export function Reader(props) {
 
     async function PressWord(word, key) {
         // Remove any punctuation from the string
-        let editedWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+        let editedWord = word.replace(/[.,\/#!$%\^&\*;:{}=\_`~()]/g, "");
         let stringWord = editedWord.replace(/[']/g, "\'");
 
         setKey(key);

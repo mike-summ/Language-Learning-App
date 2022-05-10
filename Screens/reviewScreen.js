@@ -39,13 +39,14 @@ export function Review() {
             // Get all the flashcards from the database
             let array = await retrieveData(FLASHCARD_KEY);
             let settings = await retrieveData(SETTINGS_KEY);
-
-            setIncrease(parseInt(settings["increase"]) / 100);
-            setMaxNewCards(parseInt(settings["new"]));
-
+            
+            if (settings) {
+                setIncrease(parseInt(settings["increase"]) / 100);
+                setMaxNewCards(parseInt(settings["new"]));
+            }
             let newArray = [];
             let dueArray = [];
-
+            
             for (let i = 0; i < array.length; i++) {
                 if (array[i].status == "new") {
                     newArray.push(array[i]);
@@ -62,7 +63,7 @@ export function Review() {
             let dueCards = [];
             for (let k = 0; k < dueArray.length; k++) {
 
-                let dueDate = new Date(dueArray[k].due_date.split('/')[2], dueArray[k].due_date.split('/')[1] - 1, dueArray[k].due_date.split('/')[0]);
+                let dueDate = new Date(dueArray[k].due_date.split('/')[1], dueArray[k].due_date.split('/')[2] - 1, dueArray[k].due_date.split('/')[0]);
                 let todayDate = new Date(today);
 
                 if (dueDate <= todayDate) {

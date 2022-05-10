@@ -142,21 +142,24 @@ const styles = StyleSheet.create({
         height: 50,
         fontSize: 25,
         paddingLeft: 20,
-        paddingRight: 20
+        paddingRight: 20,
+        margin: 10,
     },
     submitButton: {
         borderWidth: 1,
         borderColor: colours.accent,
         backgroundColor: colours.accent,
         padding: 15,
-        margin: 5
+        margin: 5,
+        borderRadius: 10,
     },
     deleteButton: {
         borderWidth: 1,
         borderColor: "red",
         backgroundColor: "red",
         padding: 15,
-        margin: 5
+        margin: 5,
+        borderRadius: 10,
     },
     submitButtonText: {
         color: '#FFFFFF',

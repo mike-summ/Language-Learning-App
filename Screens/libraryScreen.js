@@ -6,12 +6,12 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import { dummy_data } from '../Data/dummy_data';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import colours from '../colours';
 import { retrieveData, storeData } from '../Components/database';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
+import { Ionicons } from '@expo/vector-icons';
 
 export function Library() {
 
@@ -135,11 +135,23 @@ export function Library() {
             <ScrollView contentContainerStyle={styles.filesLayout} >
                 {files}
             </ScrollView>
-            <View style={styles.addButton}>
-                <AntDesign name="addfile" size={60} color="white" onPress={AddFile}/>
-            </View>
-            <View style={styles.clearButton}>
-                <MaterialIcons name="delete-sweep" size={60} color="white" onPress={ClearData}/>
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between"
+            }}>
+                <TouchableHighlight activeOpacity={0.5} underlayColor="white" style={styles.refresh} onPress={() => refreshPage()}>
+                        <Ionicons name="refresh-circle" size={80} color={colours.darkContrast} />
+                </TouchableHighlight>
+                <TouchableHighlight activeOpacity={0.5} underlayColor="white" onPress={() => AddFile()}>
+                    <View style={{
+                            backgroundColor: colours.darkContrast,
+                            padding: 10,
+                            borderRadius: 50,
+                            marginTop: 10,
+                        }}>
+                        <AntDesign name="addfile" size={50} color="white" />
+                    </View>
+                </TouchableHighlight>
             </View>
         </View>
     );
@@ -153,20 +165,10 @@ const styles = StyleSheet.create({
       paddingVertical: 5,
     },
     addButton: {
-        position: 'absolute',
-        bottom: 15,
-        right: 15,
         backgroundColor: colours.darkContrast,
         padding: 10,
-        borderRadius: 50
-    },
-    clearButton: {
-        position: 'absolute',
-        bottom: 15,
-        left: 15,
-        backgroundColor: "red",
-        padding: 10,
-        borderRadius: 50
+        borderRadius: 50,
+        flex: 0,
     },
     file: {
         backgroundColor: colours.lightAccent,
@@ -186,5 +188,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'flex-end',
+    },
+    refresh: {
+        width: 80,
+        left: 10,
+        borderRadius: 50,
     }
   });

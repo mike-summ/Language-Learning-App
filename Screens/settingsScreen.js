@@ -5,6 +5,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { retrieveData, storeData } from '../Components/database';
 import colours from '../colours';
+import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
 export function Settings(props) {
     const params = props.route.params;
@@ -37,6 +38,18 @@ export function Settings(props) {
         }
     }
 
+    // Clear all the files from library.
+    function ClearLibrary() {
+        AsyncStorageLib.removeItem("@files");
+        alert("Cleared Library!");
+    }
+
+    // Clear all the flashcards.
+    function ClearFlashcards() {
+        AsyncStorageLib.removeItem("@flashcards");
+        alert("Cleared Flashcards!");
+    }
+
     return (
         <View style={styles.inputContainer}>
             <Text />
@@ -63,14 +76,28 @@ export function Settings(props) {
             >
                 <Text style={styles.submitButtonText}>Save</Text>
             </TouchableHighlight>
+            <TouchableHighlight
+                onPress={ClearLibrary}
+                style={styles.deleteButton}
+            >
+                <Text style={styles.submitButtonText}>Delete all files</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+                onPress={ClearFlashcards}
+                style={styles.deleteButton}
+            >
+                <Text style={styles.submitButtonText}>Delete all flashcards</Text>
+            </TouchableHighlight>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     inputContainer: {
+        padding: 15,
         margin: 10,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        backgroundColor: "white",
     },
     textInput: {
         borderColor: '#CCCCCC',
@@ -79,14 +106,16 @@ const styles = StyleSheet.create({
         height: 50,
         fontSize: 25,
         paddingLeft: 20,
-        paddingRight: 20
+        paddingRight: 20,
+        margin: 10,
     },
     submitButton: {
         borderWidth: 1,
         borderColor: colours.accent,
         backgroundColor: colours.accent,
         padding: 15,
-        margin: 5
+        margin: 5,
+        borderRadius: 10,
     },
     submitButtonText: {
         color: '#FFFFFF',
@@ -96,5 +125,13 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 20,
         textAlign: 'center'
-    }  
+    },
+    deleteButton: {
+        borderWidth: 1,
+        borderColor: "red",
+        backgroundColor: "red",
+        padding: 15,
+        margin: 5,
+        borderRadius: 10,
+    },
 });

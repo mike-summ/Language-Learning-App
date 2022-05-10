@@ -13,10 +13,15 @@ import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
 import { Ionicons } from '@expo/vector-icons';
 
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 export function Library() {
 
     const [data, setData] = useState([]);
     const [files, setFiles] = useState([]);
+    
+    // Alert states
+    const [showAlert, setAlert] = useState(false);
 
     const FILE_KEY = "@files";
     const navigation = useNavigation();
@@ -28,7 +33,7 @@ export function Library() {
 
     useEffect(() => {
         updateFilesList();
-    }, [data])
+    }, [data]);
 
     // When a file is selected, the Reader will open with the selected file's contents
     function OnPressReader(fileName, fileText) {
@@ -40,7 +45,11 @@ export function Library() {
             let array = [];
             let tempData = [];
             const response = await retrieveData(FILE_KEY);
-            if (response) tempData = [...dummy_data, ...response];
+            if (response) {
+                tempData = [...dummy_data, ...response];
+            } else {
+                tempData = dummy_data;
+            }
 
             for (let i = 0; i < tempData.length; i++) {
                 // New file from dummy data
@@ -114,20 +123,12 @@ export function Library() {
                 setData(tempData);
 
                 await storeData(FILE_KEY, tempData);
-                alert("Added file!");
+                setAlert(true);
             }
         } catch (e) {
             console.log(e);
         }
         refreshPage();
-    }
-
-    // Clear all the files from local storage.
-    function ClearData() {
-        AsyncStorageLib.removeItem("@files");
-        setData([]);
-        setFiles([]);
-        alert("Cleared Data!");
     }
 
     return (
@@ -153,6 +154,21 @@ export function Library() {
                     </View>
                 </TouchableHighlight>
             </View>
+
+            <AwesomeAlert 
+                show={showAlert}
+                showProgress={false}
+                title="Alert"
+                message="Added file to Library!"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Okay"
+                confirmButtonColor={colours.darkContrast}
+                onConfirmPressed={() => {
+                    setAlert(false);
+                }}
+            />
         </View>
     );
 }

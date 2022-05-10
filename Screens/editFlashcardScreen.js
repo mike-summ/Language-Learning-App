@@ -5,6 +5,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { retrieveData, storeData } from '../Components/database';
 import colours from '../colours';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 export function Edit(props) {
     const params = props.route.params;
@@ -13,6 +14,10 @@ export function Edit(props) {
     const [word, setWord] = useState(params.flashcard["word"]);
     const [answer, setAnswer] = useState(params.flashcard["answer"]);  
     const navigation = useNavigation();  
+
+    // Alert states
+    const [showSave, setSave] = useState(false);
+    const [showDelete, setDelete] = useState(false);
 
     function handleWordChange(text) {
         setWord(text);
@@ -90,7 +95,7 @@ export function Edit(props) {
             console.log(card);
             storeData(FLASHCARD_KEY, flashcards);
 
-            alert("Flashcard details submitted!");
+            setSave(true);
         } catch (e) {
             console.log(e);
         }
@@ -122,11 +127,48 @@ export function Edit(props) {
             </TouchableHighlight>
 
             <TouchableHighlight
-                onPress={deleteFlashcard}
+                onPress={() => {
+                    setDelete(true);
+                }}
                 style={styles.deleteButton}
             >
                 <Text style={styles.submitButtonText}>Delete</Text>
             </TouchableHighlight>
+
+            <AwesomeAlert 
+                show={showSave}
+                showProgress={false}
+                title="Saved"
+                message="Flashcard details have been submitted!"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Okay"
+                confirmButtonColor={colours.darkContrast}
+                onConfirmPressed={() => {
+                    setSave(false);
+                }}
+            />
+
+            <AwesomeAlert 
+                show={showDelete}
+                showProgress={false}
+                title="Are you sure?"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                showCancelButton={true}
+                confirmText="Delete"
+                confirmButtonColor="red"
+                cancelText="Cancel"
+                onConfirmPressed={() => {
+                    setDelete(false);
+                    deleteFlashcard();
+                }}
+                onCancelPressed={() => {
+                    setDelete(false);
+                }}
+            />
         </View>
     );
 }

@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { retrieveData, storeData } from '../Components/database';
 import colours from '../colours';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 export function Settings(props) {
     const params = props.route.params;
@@ -13,6 +14,11 @@ export function Settings(props) {
 
     const [percentageIncrease, setIncrease] = useState(params["increase"]);
     const [newCards, setNewCards] = useState(params["new"]);
+
+    // Alert states
+    const [showSave, setSave] = useState(false);
+    const [showFiles, setFiles] = useState(false);
+    const [showFlashcards, setFlashcards] = useState(false);
 
     function handleIncreaseChange(text) {
         setIncrease(text);
@@ -32,7 +38,7 @@ export function Settings(props) {
             };
 
             storeData(SETTINGS_KEY, newSettings);
-            alert("Settings saved!");
+            setSave(true);
         } catch (e) {
             console.log("onSubmit: " + e);
         }
@@ -41,13 +47,11 @@ export function Settings(props) {
     // Clear all the files from library.
     function ClearLibrary() {
         AsyncStorageLib.removeItem("@files");
-        alert("Cleared Library!");
     }
 
     // Clear all the flashcards.
     function ClearFlashcards() {
         AsyncStorageLib.removeItem("@flashcards");
-        alert("Cleared Flashcards!");
     }
 
     return (
@@ -77,17 +81,75 @@ export function Settings(props) {
                 <Text style={styles.submitButtonText}>Save</Text>
             </TouchableHighlight>
             <TouchableHighlight
-                onPress={ClearLibrary}
+                onPress={() => {
+                    setFiles(true);
+                }}
                 style={styles.deleteButton}
             >
                 <Text style={styles.submitButtonText}>Delete all files</Text>
             </TouchableHighlight>
             <TouchableHighlight
-                onPress={ClearFlashcards}
+                onPress={() => {
+                    setFlashcards(true);
+                }}
                 style={styles.deleteButton}
             >
                 <Text style={styles.submitButtonText}>Delete all flashcards</Text>
             </TouchableHighlight>
+
+            <AwesomeAlert 
+                show={showSave}
+                showProgress={false}
+                title="Settings Saved"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Okay"
+                confirmButtonColor={colours.darkContrast}
+                onConfirmPressed={() => {
+                    setSave(false);
+                }}
+            />
+
+            <AwesomeAlert 
+                show={showFiles}
+                showProgress={false}
+                title="Are you sure?"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                showCancelButton={true}
+                confirmText="Delete"
+                confirmButtonColor="red"
+                cancelText="Cancel"
+                onConfirmPressed={() => {
+                    setFiles(false);
+                    ClearLibrary();
+                }}
+                onCancelPressed={() => {
+                    setFiles(false);
+                }}
+            />
+
+            <AwesomeAlert 
+                show={showFlashcards}
+                showProgress={false}
+                title="Are you sure?"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                showCancelButton={true}
+                confirmText="Delete"
+                confirmButtonColor="red"
+                cancelText="Cancel"
+                onConfirmPressed={() => {
+                    setFlashcards(false);
+                    ClearFlashcards();
+                }}
+                onCancelPressed={() => {
+                    setFlashcards(false);
+                }}
+            />
         </View>
     );
 }

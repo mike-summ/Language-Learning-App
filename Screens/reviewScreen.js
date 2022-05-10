@@ -40,8 +40,8 @@ export function Review() {
             let array = await retrieveData(FLASHCARD_KEY);
             let settings = await retrieveData(SETTINGS_KEY);
 
-            setIncrease(settings["increase"]);
-            setMaxNewCards(settings["new"]);
+            setIncrease(parseInt(settings["increase"]) / 100);
+            setMaxNewCards(parseInt(settings["new"]));
 
             let newArray = [];
             let dueArray = [];

@@ -23,7 +23,8 @@
     "react-native-awesome-alerts": "^1.5.2",
     "react-native-document-picker": "^8.1.0",
     "react-native-fs": "^2.19.0",
-    "react-native-gesture-handler": "~1.10.2"
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-snap-carousel": "^3.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

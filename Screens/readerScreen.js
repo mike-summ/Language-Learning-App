@@ -41,7 +41,7 @@ export function Reader(props) {
             if (i == selectedKey) {
                 array.push(
                     <Text style={{
-                        backgroundColor: 'blue',
+                        backgroundColor: colours.darkContrast,
                         color: 'white'
                     }} key={i} onPress={() => {PressWord(words[i], i)}}>{words[i]} </Text>
                 );

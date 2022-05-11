@@ -7,6 +7,7 @@ import { MyTabs } from './Screens/navigationBottomTabs';
 import { Help } from './Screens/helpScreen';
 import { Reader } from './Screens/readerScreen';
 import { Edit } from './Screens/editFlashcardScreen';
+import { Welcome } from './Screens/welcomeScreen';
 import colours from './colours';
 
 const Stack = createNativeStackNavigator();
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Welcome" component={Welcome} options={{headerStyle: {backgroundColor: colours.darkContrast}}} />
         <Stack.Screen name="Language Learning" component={MyTabs} options={{headerStyle: {backgroundColor: colours.darkContrast}}} />
         <Stack.Screen name="Reader" component={Reader} options={{headerStyle: {backgroundColor: colours.darkContrast}}}/>
         <Stack.Screen name="Edit" component={Edit} options={{headerStyle: {backgroundColor: colours.darkContrast}}}/>

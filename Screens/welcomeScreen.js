@@ -76,7 +76,10 @@ export function Welcome() {
         <View style={styles.container}>
             <Carousel {...settings} />
             <CustomPaging data={data} activeSlide={slideIndex} />
+
             <TouchableHighlight
+                activeOpacity={0.5}
+                underlayColor={colours.accent}
                 onPress={() => {
                     navigation.navigate("Language Learning");
                 }}

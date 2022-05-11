@@ -77,6 +77,8 @@ export function Settings(props) {
             <TouchableHighlight
                 onPress={onSubmit}
                 style={styles.submitButton}
+                underlayColor={colours.accent}
+                activeOpacity={0.5}
             >
                 <Text style={styles.submitButtonText}>Save</Text>
             </TouchableHighlight>
@@ -84,6 +86,8 @@ export function Settings(props) {
                 onPress={() => {
                     setFiles(true);
                 }}
+                underlayColor="red"
+                activeOpacity={0.5}
                 style={styles.deleteButton}
             >
                 <Text style={styles.submitButtonText}>Delete all files</Text>
@@ -92,6 +96,8 @@ export function Settings(props) {
                 onPress={() => {
                     setFlashcards(true);
                 }}
+                underlayColor="red"
+                activeOpacity={0.5}
                 style={styles.deleteButton}
             >
                 <Text style={styles.submitButtonText}>Delete all flashcards</Text>

@@ -16,13 +16,6 @@ export function Browse() {
      * Selecting the flaschard will allow you to edit it.
      */
 
-    /**
-     * TODO:
-     * Do styling
-     * Test on phone
-     */
-
-
     const FLASHCARD_KEY = "@flashcards";
     const [data, setData] = useState(dummy_flashcards);
     const [flaschards, setFlashcards] = useState([]);
@@ -66,8 +59,10 @@ export function Browse() {
                 paddingVertical: 10,
                 borderRadius: 10,
             }}>
-                <View style={styles.flashchards}>
+                <View style={{flexDirection: "row", flex: 0.6, justifyContent: "center",}}>
                     <Text>{data["word"]}</Text>
+                </View>
+                <View style={{flexDirection: "row", flex: 0.4}}>
                     <Text>{data["answer"]}</Text>
                 </View>
                 <View style={{flexDirection: "row", flex: 0.25,}}>
@@ -116,8 +111,8 @@ const styles = StyleSheet.create({
     },
     flashchards: {
         flexDirection: "row",
-        flex: 0.7,
-        justifyContent: "space-around",
+        flex: 0.3,
+        justifyContent: "center",
     },
     titleTable: {
         flexDirection: "row",

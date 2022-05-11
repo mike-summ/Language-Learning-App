@@ -122,6 +122,8 @@ export function Edit(props) {
             <TouchableHighlight
                 onPress={onSubmit}
                 style={styles.submitButton}
+                underlayColor={colours.accent}
+                activeOpacity={0.5}
             >
                 <Text style={styles.submitButtonText}>Save</Text>
             </TouchableHighlight>
@@ -130,6 +132,8 @@ export function Edit(props) {
                 onPress={() => {
                     setDelete(true);
                 }}
+                underlayColor="red"
+                activeOpacity={0.5}
                 style={styles.deleteButton}
             >
                 <Text style={styles.submitButtonText}>Delete</Text>

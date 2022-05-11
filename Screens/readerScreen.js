@@ -7,12 +7,18 @@ import dictionary_api from '../Data/dictionary_api';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { retrieveData, storeData } from '../Components/database';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 export function Reader(props) {
     const [textComp, setTextComp] = useState([]);
     const [selectedWord, setWord] = useState("");
     const [selectedKey, setKey] = useState();
     const [definition, setDefinition] = useState("No word selected.");
+
+    // Alert states
+    const [showAdd, setAdd] = useState(false);
+    const [showError, setError] = useState(false);
+    const [showDuplicate, setDuplicate] = useState(false);
 
     const params = props.route.params;
 
@@ -82,6 +88,12 @@ export function Reader(props) {
 
     // Add the word to the user's list of flashcards
     async function AddWord() {
+        
+        if (selectedWord == "") {
+            setError(true);
+            return;
+        }
+
         try {
             let flaschards = await retrieveData(FLASHCARD_KEY);
             let id = "";
@@ -94,6 +106,13 @@ export function Reader(props) {
             } else {
                 id = (flaschards.length + 1) + "";
                 array = [...flaschards];
+            }
+
+            for (let i = 0; i < flaschards.length; i++) {
+                if (selectedWord == flaschards[i].word) {
+                    setDuplicate(true);
+                    return;
+                }
             }
 
             word = selectedWord;
@@ -109,7 +128,7 @@ export function Reader(props) {
             });
 
             storeData(FLASHCARD_KEY, array);
-            alert("Added word!");
+            setAdd(true);
         } catch(e) {
             console.log("Add Word: " + e);
         }
@@ -144,6 +163,49 @@ export function Reader(props) {
                     <Ionicons name="add-circle" size={60} color="green" onPress={() => AddWord()} />
                 </View>
             </View>
+
+            <AwesomeAlert 
+                show={showAdd}
+                showProgress={false}
+                title="Created flaschard"
+                message="The word and definition has been saved as a flashcard!"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Okay"
+                confirmButtonColor={colours.darkContrast}
+                onConfirmPressed={() => {
+                    setAdd(false);
+                }}
+            />
+            <AwesomeAlert 
+                show={showError}
+                showProgress={false}
+                title="Warning: No word selected"
+                message="Select a word to save it as a flashcard!"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Okay"
+                confirmButtonColor="red"
+                onConfirmPressed={() => {
+                    setError(false);
+                }}
+            />
+            <AwesomeAlert 
+                show={showDuplicate}
+                showProgress={false}
+                title="Warning: Duplicate flashcard"
+                message="This word has already been saved as a flashcard!"
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Okay"
+                confirmButtonColor="red"
+                onConfirmPressed={() => {
+                    setDuplicate(false);
+                }}
+            />
         </View>
     );
 }

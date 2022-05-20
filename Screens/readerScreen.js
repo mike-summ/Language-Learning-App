@@ -80,7 +80,7 @@ export function Reader(props) {
             // Set the definition
             setDefinition(GetDefinition(finalWord));
         } catch (e) {
-            alert("Word not found in dictionary! " + e);
+            alert("Word not found in dictionary! ");
             setWord("");
             setDefinition("No word selected");
         }
@@ -106,12 +106,12 @@ export function Reader(props) {
             } else {
                 id = (flaschards.length + 1) + "";
                 array = [...flaschards];
-            }
 
-            for (let i = 0; i < flaschards.length; i++) {
-                if (selectedWord == flaschards[i].word) {
-                    setDuplicate(true);
-                    return;
+                for (let i = 0; i < flaschards.length; i++) {
+                    if (selectedWord == flaschards[i].word) {
+                        setDuplicate(true);
+                        return;
+                    }
                 }
             }
 

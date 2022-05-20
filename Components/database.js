@@ -6,7 +6,8 @@ export async function storeData(item, data) {
     try {
         await AsyncStorageLib.setItem(item, JSON.stringify(data));
     } catch (e) {
-        console.log("Error when storing data: " + e);
+
+        console.log("Error when storing data: " + JSON.stringify(item) + ":: " + JSON.stringify(data) + " :: " + e);
     }
 }
 

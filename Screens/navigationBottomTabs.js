@@ -29,7 +29,7 @@ export function MyTabs() {
                 "increase": "150",
                 "new": "10"
                 };
-                storeData(settingsData);
+                storeData(SETTINGS_KEY, settingsData);
                 setSettings(settingsData);
             } else {
                 setSettings(settings);

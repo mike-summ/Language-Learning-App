@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "LangApp",
+    "description": "A language learning application to build your vocabulary.",
     "slug": "LangApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,13 +18,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bournemouth.langapp",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.bournemouth.langapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

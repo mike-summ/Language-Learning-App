@@ -20,7 +20,7 @@ export function Welcome() {
     const data = [
         {
             title: "Welcome",
-            description: "This is a language learning application.",
+            description: "This is a language learning application. \n\nHere you can build your vocabularly by reading the content you enjoy.",
             source: welcomeImage,
         },
         
